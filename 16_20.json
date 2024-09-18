@@ -1,0 +1,32 @@
+[
+    {
+        "question_id": "16",
+        "title_slug": "3sum-closest",
+        "content": "Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target. Return the sum of the three integers. You may assume that each input would have exactly one solution. Example 1: Input: nums = [-1,2,1,-4], target = 1 Output: 2 Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2). Example 2: Input: nums = [0,0,0], target = 1 Output: 0 Explanation: The sum that is closest to the target is 0. (0 + 0 + 0 = 0). Constraints: 3 <= nums.length <= 500 -1000 <= nums[i] <= 1000 -10^4 <= target <= 10^4",
+        "typed_code": "function threeSumClosest(nums, target) { nums.sort((a, b) => a - b); let closestSum = Infinity; for (let i = 0; i < nums.length - 2; i++) { let left = i + 1, right = nums.length - 1; while (left < right) { const sum = nums[i] + nums[left] + nums[right]; if (sum === target) return sum; if (Math.abs(sum - target) < Math.abs(closestSum - target)) closestSum = sum; if (sum < target) left++; else right--; } } return closestSum; }"
+    },
+    {
+        "question_id": "17",
+        "title_slug": "letter-combinations-of-a-phone-number",
+        "content": "Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order. A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters. Example 1: Input: digits = \"23\" Output: [\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"] Example 2: Input: digits = \"\" Output: [] Example 3: Input: digits = \"2\" Output: [\"a\",\"b\",\"c\"] Constraints: 0 <= digits.length <= 4 digits[i] is a digit in the range ['2', '9'].",
+        "typed_code": "function letterCombinations(digits) { if (!digits) return []; const mapping = { '2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl', '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz' }; let combinations = ['']; for (const digit of digits) { const letters = mapping[digit]; let newCombinations = []; for (const combination of combinations) { for (const letter of letters) { newCombinations.push(combination + letter); } } combinations = newCombinations; } return combinations; }"
+    },
+    {
+        "question_id": "18",
+        "title_slug": "4sum",
+        "content": "Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that: 0 <= a, b, c, d < n a, b, c, and d are distinct. nums[a] + nums[b] + nums[c] + nums[d] == target. You may return the answer in any order. Example 1: Input: nums = [1,0,-1,0,-2,2], target = 0 Output: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]] Example 2: Input: nums = [2,2,2,2,2], target = 8 Output: [[2,2,2,2]] Constraints: 1 <= nums.length <= 200 -10^9 <= nums[i] <= 10^9 -10^9 <= target <= 10^9",
+        "typed_code": "function fourSum(nums, target) { nums.sort((a, b) => a - b); const results = []; const n = nums.length; for (let i = 0; i < n - 3; i++) { if (i > 0 && nums[i] === nums[i - 1]) continue; for (let j = i + 1; j < n - 2; j++) { if (j > i + 1 && nums[j] === nums[j - 1]) continue; let left = j + 1, right = n - 1; while (left < right) { const sum = nums[i] + nums[j] + nums[left] + nums[right]; if (sum === target) { results.push([nums[i], nums[j], nums[left], nums[right]]); while (left < right && nums[left] === nums[left + 1]) left++; while (left < right && nums[right] === nums[right - 1]) right--; left++; right--; } else if (sum < target) left++; else right--; } } } return results; }"
+    },
+    {
+        "question_id": "19",
+        "title_slug": "remove-nth-node-from-end-of-list",
+        "content": "Given the head of a linked list, remove the nth node from the end of the list and return its head. Example 1: Input: head = [1,2,3,4,5], n = 2 Output: [1,2,3,5] Example 2: Input: head = [1], n = 1 Output: [] Example 3: Input: head = [1,2], n = 1 Output: [1] Constraints: The number of nodes in the list is sz. 1 <= sz <= 30 0 <= Node.val <= 100 1 <= n <= sz Follow up: Could you do this in one pass?",
+        "typed_code": "function removeNthFromEnd(head, n) { const dummy = new ListNode(0); dummy.next = head; let first = dummy, second = dummy; for (let i = 1; i <= n + 1; i++) first = first.next; while (first) { first = first.next; second = second.next; } second.next = second.next.next; return dummy.next; }"
+    },
+    {
+        "question_id": "20",
+        "title_slug": "valid-parentheses",
+        "content": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. An input string is valid if: Open brackets must be closed by the same type of brackets. Open brackets must be closed in the correct order. Every close bracket has a corresponding open bracket of the same type. Example 1: Input: s = \"()\" Output: true Example 2: Input: s = \"()[]{}\" Output: true Example 3: Input: s = \"(]\" Output: false Example 4: Input: s = \"([])\" Output: true Constraints: 1 <= s.length <= 10^4 s consists of parentheses only '()[]{}'.",
+        "typed_code": "function isValid(s) { const stack = []; const mapping = { ')': '(', '}': '{', ']': '[' }; for (const char of s) { if (char in mapping) { const topElement = stack.length === 0 ? '#' : stack.pop(); if (topElement !== mapping[char]) return false; } else { stack.push(char); } } return stack.length === 0; }"
+    }
+]

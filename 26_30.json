@@ -1,0 +1,32 @@
+[
+    {
+        "question_id": "26",
+        "title_slug": "remove-duplicates-from-sorted-array",
+        "content": "Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.",
+        "typed_code": "\n        function removeDuplicates(nums) {\n            let k = 0;\n            for (let i = 1; i < nums.length; i++) {\n                if (nums[i] !== nums[k]) {\n                    k++;\n                    nums[k] = nums[i];\n                }\n            }\n            return k + 1;\n        }\n        "
+    },
+    {
+        "question_id": "27",
+        "title_slug": "remove-element",
+        "content": "Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.",
+        "typed_code": "\n        function removeElement(nums, val) {\n            let k = 0;\n            for (let i = 0; i < nums.length; i++) {\n                if (nums[i] !== val) {\n                    nums[k] = nums[i];\n                    k++;\n                }\n            }\n            return k;\n        }\n        "
+    },
+    {
+        "question_id": "28",
+        "title_slug": "find-the-index-of-the-first-occurrence-in-a-string",
+        "content": "Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.",
+        "typed_code": "\n        function strStr(haystack, needle) {\n            return haystack.indexOf(needle);\n        }\n        "
+    },
+    {
+        "question_id": "29",
+        "title_slug": "divide-two-integers",
+        "content": "Given two integers dividend and divisor, divide two integers without using multiplication, division, and mod operator.",
+        "typed_code": "\n        function divide(dividend, divisor) {\n            const MAX = 2147483647, MIN = -2147483648;\n            if (dividend === MIN && divisor === -1) return MAX;\n            let sign = (dividend > 0) === (divisor > 0) ? 1 : -1;\n            dividend = Math.abs(dividend);\n            divisor = Math.abs(divisor);\n            let result = 0;\n            while (dividend >= divisor) {\n                let temp = divisor, multiple = 1;\n                while (dividend >= (temp << 1)) {\n                    temp <<= 1;\n                    multiple <<= 1;\n                }\n                dividend -= temp;\n                result += multiple;\n            }\n            return sign * result;\n        }\n        "
+    },
+    {
+        "question_id": "30",
+        "title_slug": "substring-with-concatenation-of-all-words",
+        "content": "You are given a string s and an array of strings words. All the strings of words are of the same length. Return an array of the starting indices of all the concatenated substrings in s.",
+        "typed_code": "\n        function findSubstring(s, words) {\n            const wordLen = words[0].length;\n            const totalLen = wordLen * words.length;\n            const result = [];\n            const wordMap = {};\n            for (let word of words) {\n                wordMap[word] = (wordMap[word] || 0) + 1;\n            }\n            for (let i = 0; i <= s.length - totalLen; i++) {\n                const seen = {};\n                let j = 0;\n                while (j < words.length) {\n                    const word = s.substr(i + j * wordLen, wordLen);\n                    if (!wordMap[word]) break;\n                    seen[word] = (seen[word] || 0) + 1;\n                    if (seen[word] > wordMap[word]) break;\n                    j++;\n                }\n                if (j === words.length) result.push(i);\n            }\n            return result;\n        }\n        "
+    }
+]

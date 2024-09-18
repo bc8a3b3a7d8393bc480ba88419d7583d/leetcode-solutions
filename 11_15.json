@@ -1,0 +1,32 @@
+[
+    {
+        "question_id": "11",
+        "title_slug": "container-with-most-water",
+        "content": "You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]). Find two lines that together with the x-axis form a container, such that the container contains the most water. Return the maximum amount of water a container can store. Notice that you may not slant the container.",
+        "typed_code": "\n        function maxArea(height) {\n            let left = 0;\n            let right = height.length - 1;\n            let maxArea = 0;\n            \n            while (left < right) {\n                const width = right - left;\n                const currentArea = Math.min(height[left], height[right]) * width;\n                maxArea = Math.max(maxArea, currentArea);\n                \n                if (height[left] < height[right]) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n            \n            return maxArea;\n        }\n        "
+    },
+    {
+        "question_id": "12",
+        "title_slug": "integer-to-roman",
+        "content": "Seven different symbols represent Roman numerals with the following values. Roman numerals are formed by appending the conversions of decimal place values from highest to lowest. Given an integer, convert it to a Roman numeral.",
+        "typed_code": "\n        function intToRoman(num) {\n            const val = [\n                1000, 900, 500, 400, \n                100, 90, 50, 40, \n                10, 9, 5, 4, \n                1\n            ];\n            const symbols = [\n                \"M\", \"CM\", \"D\", \"CD\", \n                \"C\", \"XC\", \"L\", \"XL\", \n                \"X\", \"IX\", \"V\", \"IV\", \n                \"I\"\n            ];\n            let roman = '';\n            \n            for (let i = 0; i < val.length; i++) {\n                while (num >= val[i]) {\n                    num -= val[i];\n                    roman += symbols[i];\n                }\n            }\n            return roman;\n        }\n        "
+    },
+    {
+        "question_id": "13",
+        "title_slug": "roman-to-integer",
+        "content": "Roman numerals are represented by seven different symbols. Given a roman numeral, convert it to an integer.",
+        "typed_code": "\n        function romanToInt(s) {\n            const roman = {\n                'I': 1,\n                'V': 5,\n                'X': 10,\n                'L': 50,\n                'C': 100,\n                'D': 500,\n                'M': 1000\n            };\n            let total = 0;\n            \n            for (let i = 0; i < s.length; i++) {\n                const current = roman[s[i]];\n                const next = roman[s[i + 1]];\n                \n                if (next && current < next) {\n                    total -= current;\n                } else {\n                    total += current;\n                }\n            }\n            \n            return total;\n        }\n        "
+    },
+    {
+        "question_id": "14",
+        "title_slug": "longest-common-prefix",
+        "content": "Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string.",
+        "typed_code": "\n        function longestCommonPrefix(strs) {\n            if (strs.length === 0) return '';\n            let prefix = strs[0];\n            \n            for (let i = 1; i < strs.length; i++) {\n                while (strs[i].indexOf(prefix) !== 0) {\n                    prefix = prefix.slice(0, prefix.length - 1);\n                    if (prefix === '') return '';\n                }\n            }\n            return prefix;\n        }\n        "
+    },
+    {
+        "question_id": "15",
+        "title_slug": "3sum",
+        "content": "Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0. Notice that the solution set must not contain duplicate triplets.",
+        "typed_code": "\n        function threeSum(nums) {\n            nums.sort((a, b) => a - b);\n            const res = [];\n            \n            for (let i = 0; i < nums.length - 2; i++) {\n                if (i > 0 && nums[i] === nums[i - 1]) continue;\n                \n                let left = i + 1;\n                let right = nums.length - 1;\n                \n                while (left < right) {\n                    const sum = nums[i] + nums[left] + nums[right];\n                    \n                    if (sum === 0) {\n                        res.push([nums[i], nums[left], nums[right]]);\n                        while (nums[left] === nums[left + 1]) left++;\n                        while (nums[right] === nums[right - 1]) right--;\n                        left++;\n                        right--;\n                    } else if (sum < 0) {\n                        left++;\n                    } else {\n                        right--;\n                    }\n                }\n            }\n            \n            return res;\n        }\n        "
+    }
+]

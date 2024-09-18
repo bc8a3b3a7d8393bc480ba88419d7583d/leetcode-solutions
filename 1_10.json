@@ -1,0 +1,62 @@
+[
+    {
+        "questionId": "1",
+        "titleSlug": "two-sum",
+        "content": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.",
+        "typed_code": "\n        function twoSum(nums, target) {\n            const map = new Map();\n            for (let i = 0; i < nums.length; i++) {\n                const complement = target - nums[i];\n                if (map.has(complement)) {\n                    return [map.get(complement), i];\n                }\n                map.set(nums[i], i);\n            }\n        }\n        "
+    },
+    {
+        "questionId": "2",
+        "titleSlug": "add-two-numbers",
+        "content": "You are given two non-empty linked lists representing two non-negative integers. Add the two numbers and return the sum as a linked list.",
+        "typed_code": "\n        function ListNode(val, next = null) {\n            this.val = val;\n            this.next = next;\n        }\n        \n        function addTwoNumbers(l1, l2) {\n            let dummy = new ListNode(0);\n            let p = l1, q = l2, curr = dummy;\n            let carry = 0;\n            while (p !== null || q !== null) {\n                let x = (p !== null) ? p.val : 0;\n                let y = (q !== null) ? q.val : 0;\n                let sum = carry + x + y;\n                carry = Math.floor(sum / 10);\n                curr.next = new ListNode(sum % 10);\n                curr = curr.next;\n                if (p !== null) p = p.next;\n                if (q !== null) q = q.next;\n            }\n            if (carry > 0) {\n                curr.next = new ListNode(carry);\n            }\n            return dummy.next;\n        }\n        "
+    },
+    {
+        "questionId": "3",
+        "titleSlug": "longest-substring-without-repeating-characters",
+        "content": "Given a string s, find the length of the longest substring without repeating characters.",
+        "typed_code": "\n        function lengthOfLongestSubstring(s) {\n            let map = new Map();\n            let left = 0, maxLength = 0;\n            for (let right = 0; right < s.length; right++) {\n                if (map.has(s[right])) {\n                    left = Math.max(map.get(s[right]) + 1, left);\n                }\n                map.set(s[right], right);\n                maxLength = Math.max(maxLength, right - left + 1);\n            }\n            return maxLength;\n        }\n        "
+    },
+    {
+        "questionId": "4",
+        "titleSlug": "median-of-two-sorted-arrays",
+        "content": "Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.",
+        "typed_code": "\n        function findMedianSortedArrays(nums1, nums2) {\n            let merged = [...nums1, ...nums2].sort((a, b) => a - b);\n            let len = merged.length;\n            if (len % 2 === 0) {\n                return (merged[len / 2 - 1] + merged[len / 2]) / 2;\n            } else {\n                return merged[Math.floor(len / 2)];\n            }\n        }\n        "
+    },
+    {
+        "questionId": "5",
+        "titleSlug": "longest-palindromic-substring",
+        "content": "Given a string s, return the longest palindromic substring in s.",
+        "typed_code": "\n        function longestPalindrome(s) {\n            let start = 0, maxLength = 1;\n            function expandAroundCenter(left, right) {\n                while (left >= 0 && right < s.length && s[left] === s[right]) {\n                    if (right - left + 1 > maxLength) {\n                        start = left;\n                        maxLength = right - left + 1;\n                    }\n                    left--;\n                    right++;\n                }\n            }\n            for (let i = 0; i < s.length; i++) {\n                expandAroundCenter(i, i); // odd length palindrome\n                expandAroundCenter(i, i + 1); // even length palindrome\n            }\n            return s.substring(start, start + maxLength);\n        }\n        "
+    },
+    {
+        "questionId": "6",
+        "titleSlug": "zigzag-conversion",
+        "content": "The string PAYPALISHIRING is written in a zigzag pattern on a given number of rows. Write the code that will take a string and make this conversion given a number of rows.",
+        "typed_code": "\n        function convert(s, numRows) {\n            if (numRows === 1) return s;\n            const rows = Array(Math.min(numRows, s.length)).fill('');\n            let curRow = 0;\n            let goingDown = false;\n            for (let char of s) {\n                rows[curRow] += char;\n                if (curRow === 0 || curRow === numRows - 1) goingDown = !goingDown;\n                curRow += goingDown ? 1 : -1;\n            }\n            return rows.join('');\n        }\n        "
+    },
+    {
+        "questionId": "7",
+        "titleSlug": "reverse-integer",
+        "content": "Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range, return 0.",
+        "typed_code": "\n        function reverse(x) {\n            const limit = 2147483648; \n            const sign = x < 0 ? -1 : 1;\n            const revNum = parseInt(String(Math.abs(x)).split('').reverse().join('')) * sign;\n            return revNum >= -limit && revNum < limit ? revNum : 0;\n        }\n        "
+    },
+    {
+        "questionId": "8",
+        "titleSlug": "string-to-integer-atoi",
+        "content": "Implement the myAtoi(string s) function, which converts a string to a 32-bit signed integer.",
+        "typed_code": "\n        function myAtoi(s) {\n            const match = s.trim().match(/^([+-]?\\d+)/);\n            const num = match ? parseInt(match[0], 10) : 0;\n            const INT_MIN = -2147483648;\n            const INT_MAX = 2147483647;\n            if (num < INT_MIN) return INT_MIN;\n            if (num > INT_MAX) return INT_MAX;\n            return num;\n        }\n        "
+    },
+    {
+        "questionId": "9",
+        "titleSlug": "palindrome-number",
+        "content": "Given an integer x, return true if x is a palindrome, and false otherwise.",
+        "typed_code": "\n        function isPalindrome(x) {\n            if (x < 0) return false;\n            return x === parseInt(String(x).split('').reverse().join(''));\n        }\n        "
+    },
+    {
+        "questionId": "10",
+        "titleSlug": "regular-expression-matching",
+        "content": "Given an input string s and a pattern p, implement regular expression matching with support for '.' and '*'.",
+        "typed_code": "\n        function isMatch(s, p) {\n            const dp = Array(s.length + 1).fill(null).map(() => Array(p.length + 1).fill(false));\n            dp[0][0] = true;\n            for (let i = 1; i <= p.length; i++) {\n                if (p[i - 1] === '*') {\n                    dp[0][i] = dp[0][i - 2];\n                }\n            }\n            for (let i = 1; i <= s.length; i++) {\n                for (let j = 1; j <= p.length; j++) {\n                    if (p[j - 1] === '.' || p[j - 1] === s[i - 1]) {\n                        dp[i][j] = dp[i - 1][j - 1];\n                    } else if (p[j - 1] === '*') {\n                        dp[i][j] = dp[i][j - 2] || (p[j - 2] === s[i - 1] || p[j - 2] === '.') && dp[i - 1][j];\n                    }\n                }\n            }\n            return dp[s.length][p.length];\n        }\n        "
+    }
+]

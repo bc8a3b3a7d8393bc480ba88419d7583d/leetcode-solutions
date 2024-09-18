@@ -1,0 +1,32 @@
+[
+    {
+        "question_id": "126",
+        "title_slug": "word-ladder-ii",
+        "content": "A transformation sequence from word beginWord to word endWord using a dictionary wordList is a sequence of words [beginWord -> s1 -> s2 -> ... -> sk] such that every adjacent pair of words differs by a single letter. Given two words, beginWord and endWord, and a dictionary wordList, return all the shortest transformation sequences from beginWord to endWord, or an empty list if no such sequence exists. Each sequence should be returned as a list of the words [beginWord, s1, s2, ..., sk].",
+        "typed_code": "\n        function findLadders(beginWord, endWord, wordList) {\n            const wordSet = new Set(wordList);\n            if (!wordSet.has(endWord)) return [];\n            const res = [];\n            const layer = {};\n            layer[beginWord] = [[beginWord]];\n            while (Object.keys(layer).length > 0) {\n                const newLayer = {};\n                for (const word of Object.keys(layer)) {\n                    if (word === endWord) {\n                        for (const seq of layer[word]) {\n                            res.push(seq);\n                        }\n                    } else {\n                        for (let i = 0; i < word.length; i++) {\n                            for (let c = 97; c <= 122; c++) {\n                                const newWord = word.slice(0, i) + String.fromCharCode(c) + word.slice(i + 1);\n                                if (wordSet.has(newWord)) {\n                                    if (!newLayer[newWord]) newLayer[newWord] = [];\n                                    newLayer[newWord].push([...layer[word], newWord]);\n                                }\n                            }\n                        }\n                    }\n                }\n                for (const word of Object.keys(newLayer)) {\n                    wordSet.delete(word);\n                }\n                layer = newLayer;\n            }\n            return res;\n        }\n        "
+    },
+    {
+        "question_id": "127",
+        "title_slug": "word-ladder",
+        "content": "A transformation sequence from word beginWord to word endWord using a dictionary wordList is a sequence of words [beginWord -> s1 -> s2 -> ... -> sk] such that every adjacent pair of words differs by a single letter. Given two words, beginWord and endWord, and a dictionary wordList, return the number of words in the shortest transformation sequence from beginWord to endWord, or 0 if no such sequence exists.",
+        "typed_code": "\n        function ladderLength(beginWord, endWord, wordList) {\n            const wordSet = new Set(wordList);\n            if (!wordSet.has(endWord)) return 0;\n            let queue = [[beginWord, 1]];\n            while (queue.length > 0) {\n                const [word, level] = queue.shift();\n                if (word === endWord) return level;\n                for (let i = 0; i < word.length; i++) {\n                    for (let c = 97; c <= 122; c++) {\n                        const newWord = word.slice(0, i) + String.fromCharCode(c) + word.slice(i + 1);\n                        if (wordSet.has(newWord)) {\n                            queue.push([newWord, level + 1]);\n                            wordSet.delete(newWord);\n                        }\n                    }\n                }\n            }\n            return 0;\n        }\n        "
+    },
+    {
+        "question_id": "128",
+        "title_slug": "longest-consecutive-sequence",
+        "content": "Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence. You must write an algorithm that runs in O(n) time.",
+        "typed_code": "\n        function longestConsecutive(nums) {\n            const numSet = new Set(nums);\n            let longest = 0;\n            for (const num of numSet) {\n                if (!numSet.has(num - 1)) {\n                    let length = 1;\n                    while (numSet.has(num + length)) {\n                        length++;\n                    }\n                    longest = Math.max(longest, length);\n                }\n            }\n            return longest;\n        }\n        "
+    },
+    {
+        "question_id": "129",
+        "title_slug": "sum-root-to-leaf-numbers",
+        "content": "You are given the root of a binary tree containing digits from 0 to 9 only. Each root-to-leaf path in the tree represents a number. Return the total sum of all root-to-leaf numbers. A leaf node is a node with no children.",
+        "typed_code": "\n        function sumNumbers(root) {\n            const dfs = (node, currentSum) => {\n                if (!node) return 0;\n                currentSum = currentSum * 10 + node.val;\n                if (!node.left && !node.right) {\n                    return currentSum;\n                }\n                return dfs(node.left, currentSum) + dfs(node.right, currentSum);\n            };\n            return dfs(root, 0);\n        }\n        "
+    },
+    {
+        "question_id": "130",
+        "title_slug": "surrounded-regions",
+        "content": "You are given an m x n matrix board containing letters 'X' and 'O', capture regions that are surrounded. A region is captured by replacing all 'O's with 'X's in the input matrix board.",
+        "typed_code": "\n        function solve(board) {\n            if (board.length === 0) return;\n            const rows = board.length, cols = board[0].length;\n            const dfs = (i, j) => {\n                if (i < 0 || i >= rows || j < 0 || j >= cols || board[i][j] !== 'O') return;\n                board[i][j] = 'T';\n                dfs(i - 1, j);\n                dfs(i + 1, j);\n                dfs(i, j - 1);\n                dfs(i, j + 1);\n            };\n            for (let i = 0; i < rows; i++) {\n                if (board[i][0] === 'O') dfs(i, 0);\n                if (board[i][cols - 1] === 'O') dfs(i, cols - 1);\n            }\n            for (let j = 0; j < cols; j++) {\n                if (board[0][j] === 'O') dfs(0, j);\n                if (board[rows - 1][j] === 'O') dfs(rows - 1, j);\n            }\n            for (let i = 0; i < rows; i++) {\n                for (let j = 0; j < cols; j++) {\n                    if (board[i][j] === 'O') board[i][j] = 'X';\n                    if (board[i][j] === 'T') board[i][j] = 'O';\n                }\n            }\n        }\n        "
+    }
+]

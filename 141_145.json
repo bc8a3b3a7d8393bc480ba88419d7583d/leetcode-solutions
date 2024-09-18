@@ -1,0 +1,32 @@
+[
+  {
+    "question_id": "141",
+    "title_slug": "linked-list-cycle",
+    "content": "Given head, the head of a linked list, determine if the linked list has a cycle in it. There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Return true if there is a cycle in the linked list. Otherwise, return false.",
+    "typed_code": "var hasCycle = function(head) { let slow = head, fast = head; while (fast && fast.next) { slow = slow.next; fast = fast.next.next; if (slow === fast) return true; } return false; };"
+  },
+  {
+    "question_id": "142",
+    "title_slug": "linked-list-cycle-ii",
+    "content": "Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.",
+    "typed_code": "var detectCycle = function(head) { let slow = head, fast = head; while (fast && fast.next) { slow = slow.next; fast = fast.next.next; if (slow === fast) { let ptr = head; while (ptr !== slow) { ptr = ptr.next; slow = slow.next; } return ptr; } } return null; };"
+  },
+  {
+    "question_id": "143",
+    "title_slug": "reorder-list",
+    "content": "You are given the head of a singly linked list. Reorder the list to be on the following form: L0 → Ln → L1 → Ln-1 → L2 → Ln-2 → …",
+    "typed_code": "var reorderList = function(head) { if (!head || !head.next) return; let slow = head, fast = head; while (fast && fast.next) { slow = slow.next; fast = fast.next.next; } let prev = null, curr = slow.next; slow.next = null; while (curr) { let next = curr.next; curr.next = prev; prev = curr; curr = next; } let first = head, second = prev; while (second) { let tmp1 = first.next, tmp2 = second.next; first.next = second; second.next = tmp1; first = tmp1; second = tmp2; } };"
+  },
+  {
+    "question_id": "144",
+    "title_slug": "binary-tree-preorder-traversal",
+    "content": "Given the root of a binary tree, return the preorder traversal of its nodes' values.",
+    "typed_code": "var preorderTraversal = function(root) { let res = []; let stack = [root]; while (stack.length) { let node = stack.pop(); if (node) { res.push(node.val); stack.push(node.right); stack.push(node.left); } } return res; };"
+  },
+  {
+    "question_id": "145",
+    "title_slug": "binary-tree-postorder-traversal",
+    "content": "Given the root of a binary tree, return the postorder traversal of its nodes' values.",
+    "typed_code": "var postorderTraversal = function(root) { let res = []; let stack = [root]; let prev = null; while (stack.length) { let curr = stack[stack.length - 1]; if (!prev || prev.left === curr || prev.right === curr) { if (curr.left) { stack.push(curr.left); } else if (curr.right) { stack.push(curr.right); } else { res.push(curr.val); stack.pop(); } } else if (curr.left === prev) { if (curr.right) { stack.push(curr.right); } } else { res.push(curr.val); stack.pop(); } prev = curr; } return res; };"
+  }
+]

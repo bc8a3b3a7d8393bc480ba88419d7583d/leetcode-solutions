@@ -1,0 +1,32 @@
+[
+    {
+      "question_id": "146",
+      "title_slug": "lru-cache",
+      "content": "Design a data structure that follows the constraints of a Least Recently Used (LRU) cache. Implement the LRUCache class: LRUCache(int capacity): Initialize the LRU cache with positive size capacity. int get(int key): Return the value of the key if the key exists, otherwise return -1. void put(int key, int value): Update the value of the key if the key exists. Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.",
+      "typed_code": "class LRUCache { constructor(capacity) { this.capacity = capacity; this.cache = new Map(); } get(key) { if (!this.cache.has(key)) return -1; const value = this.cache.get(key); this.cache.delete(key); this.cache.set(key, value); return value; } put(key, value) { if (this.cache.has(key)) this.cache.delete(key); this.cache.set(key, value); if (this.cache.size > this.capacity) { const oldestKey = this.cache.keys().next().value; this.cache.delete(oldestKey); } }}"
+    },
+    {
+      "question_id": "147",
+      "title_slug": "insertion-sort-list",
+      "content": "Given the head of a singly linked list, sort the list using insertion sort, and return the sorted list's head.",
+      "typed_code": "var insertionSortList = function(head) { if (!head) return head; const dummy = new ListNode(0); let curr = head; while (curr) { let prev = dummy; while (prev.next && prev.next.val < curr.val) prev = prev.next; const next = curr.next; curr.next = prev.next; prev.next = curr; curr = next; } return dummy.next; };"
+    },
+    {
+      "question_id": "148",
+      "title_slug": "sort-list",
+      "content": "Given the head of a linked list, return the list after sorting it in ascending order.",
+      "typed_code": "var sortList = function(head) { if (!head || !head.next) return head; const mid = getMid(head); const left = sortList(head); const right = sortList(mid); return merge(left, right); }; function getMid(head) { let slow = head, fast = head.next; while (fast && fast.next) { slow = slow.next; fast = fast.next.next; } const mid = slow.next; slow.next = null; return mid; } function merge(list1, list2) { const dummy = new ListNode(); let curr = dummy; while (list1 && list2) { if (list1.val < list2.val) { curr.next = list1; list1 = list1.next; } else { curr.next = list2; list2 = list2.next; } curr = curr.next; } curr.next = list1 || list2; return dummy.next; }"
+    },
+    {
+      "question_id": "149",
+      "title_slug": "max-points-on-a-line",
+      "content": "Given an array of points where points[i] = [xi, yi] represents a point on the X-Y plane, return the maximum number of points that lie on the same straight line.",
+      "typed_code": "var maxPoints = function(points) { if (points.length <= 2) return points.length; const getSlope = (p1, p2) => { const dx = p1[0] - p2[0]; const dy = p1[1] - p2[1]; if (dx === 0) return Infinity; return dy / dx; }; let max = 0; for (let i = 0; i < points.length; i++) { const slopes = new Map(); let duplicates = 1; let currMax = 0; for (let j = i + 1; j < points.length; j++) { if (points[i][0] === points[j][0] && points[i][1] === points[j][1]) { duplicates++; continue; } const slope = getSlope(points[i], points[j]); slopes.set(slope, (slopes.get(slope) || 0) + 1); currMax = Math.max(currMax, slopes.get(slope)); } max = Math.max(max, currMax + duplicates); } return max; };"
+    },
+    {
+      "question_id": "150",
+      "title_slug": "evaluate-reverse-polish-notation",
+      "content": "You are given an array of strings tokens that represents an arithmetic expression in Reverse Polish Notation. Evaluate the expression and return an integer that represents the value of the expression.",
+      "typed_code": "var evalRPN = function(tokens) { const stack = []; tokens.forEach(token => { if (!isNaN(token)) { stack.push(Number(token)); } else { const b = stack.pop(); const a = stack.pop(); switch (token) { case '+': stack.push(a + b); break; case '-': stack.push(a - b); break; case '*': stack.push(a * b); break; case '/': stack.push(Math.trunc(a / b)); break; } } }); return stack.pop(); };"
+    }
+  ]

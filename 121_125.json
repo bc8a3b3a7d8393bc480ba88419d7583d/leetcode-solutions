@@ -1,0 +1,32 @@
+[
+    {
+        "question_id": "121",
+        "title_slug": "best-time-to-buy-and-sell-stock",
+        "content": "You are given an array prices where prices[i] is the price of a given stock on the ith day. You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.",
+        "typed_code": "\n    var maxProfit = function(prices) {\n        let minPrice = Infinity;\n        let maxProfit = 0;\n        for (let i = 0; i < prices.length; i++) {\n            if (prices[i] < minPrice) {\n                minPrice = prices[i];\n            } else if (prices[i] - minPrice > maxProfit) {\n                maxProfit = prices[i] - minPrice;\n            }\n        }\n        return maxProfit;\n    };\n    "
+    },
+    {
+        "question_id": "122",
+        "title_slug": "best-time-to-buy-and-sell-stock-ii",
+        "content": "You are given an integer array prices where prices[i] is the price of a given stock on the ith day. On each day, you may decide to buy and/or sell the stock. You can only hold at most one share of the stock at any time. However, you can buy it then immediately sell it on the same day. Find and return the maximum profit you can achieve.",
+        "typed_code": "\n    var maxProfit = function(prices) {\n        let profit = 0;\n        for (let i = 1; i < prices.length; i++) {\n            if (prices[i] > prices[i - 1]) {\n                profit += prices[i] - prices[i - 1];\n            }\n        }\n        return profit;\n    };\n    "
+    },
+    {
+        "question_id": "123",
+        "title_slug": "best-time-to-buy-and-sell-stock-iii",
+        "content": "You are given an array prices where prices[i] is the price of a given stock on the ith day. Find the maximum profit you can achieve. You may complete at most two transactions. Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).",
+        "typed_code": "\n    var maxProfit = function(prices) {\n        let buy1 = -Infinity, buy2 = -Infinity;\n        let sell1 = 0, sell2 = 0;\n        for (let price of prices) {\n            buy1 = Math.max(buy1, -price);\n            sell1 = Math.max(sell1, buy1 + price);\n            buy2 = Math.max(buy2, sell1 - price);\n            sell2 = Math.max(sell2, buy2 + price);\n        }\n        return sell2;\n    };\n    "
+    },
+    {
+        "question_id": "124",
+        "title_slug": "binary-tree-maximum-path-sum",
+        "content": "A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass through the root. The path sum of a path is the sum of the node's values in the path. Given the root of a binary tree, return the maximum path sum of any non-empty path.",
+        "typed_code": "\n    var maxPathSum = function(root) {\n        let maxSum = -Infinity;\n        const dfs = (node) => {\n            if (!node) return 0;\n            let left = Math.max(dfs(node.left), 0);\n            let right = Math.max(dfs(node.right), 0);\n            let priceNewpath = node.val + left + right;\n            maxSum = Math.max(maxSum, priceNewpath);\n            return node.val + Math.max(left, right);\n        };\n        dfs(root);\n        return maxSum;\n    };\n    "
+    },
+    {
+        "question_id": "125",
+        "title_slug": "valid-palindrome",
+        "content": "A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers. Given a string s, return true if it is a palindrome, or false otherwise.",
+        "typed_code": "\n    var isPalindrome = function(s) {\n        s = s.replace(/[^A-Za-z0-9]/g, '').toLowerCase();\n        let left = 0, right = s.length - 1;\n        while (left < right) {\n            if (s[left] !== s[right]) return false;\n            left++;\n            right--;\n        }\n        return true;\n    };\n    "
+    }
+]

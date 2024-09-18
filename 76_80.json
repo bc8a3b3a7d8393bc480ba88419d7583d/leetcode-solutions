@@ -1,0 +1,32 @@
+[
+    {
+        "question_id": "76",
+        "title_slug": "minimum-window-substring",
+        "content": "Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string \"\".",
+        "typed_code": "function minWindow(s, t) {\n            let need = {}, have = {};\n            for (let char of t) need[char] = (need[char] || 0) + 1;\n            let haveCount = 0, needCount = Object.keys(need).length;\n            let res = \"\", l = 0;\n\n            for (let r = 0; r < s.length; r++) {\n                let char = s[r];\n                if (char in need) {\n                    have[char] = (have[char] || 0) + 1;\n                    if (have[char] === need[char]) haveCount++;\n                }\n\n                while (haveCount === needCount) {\n                    if (res === \"\" || r - l + 1 < res.length) res = s.slice(l, r + 1);\n                    let leftChar = s[l];\n                    if (leftChar in need) {\n                        have[leftChar]--;\n                        if (have[leftChar] < need[leftChar]) haveCount--;\n                    }\n                    l++;\n                }\n            }\n            return res;\n        }"
+    },
+    {
+        "question_id": "77",
+        "title_slug": "combinations",
+        "content": "Given two integers n and k, return all possible combinations of k numbers chosen from the range [1, n].",
+        "typed_code": "function combine(n, k) {\n            let res = [];\n            function backtrack(start, comb) {\n                if (comb.length === k) {\n                    res.push([...comb]);\n                    return;\n                }\n                for (let i = start; i <= n; i++) {\n                    comb.push(i);\n                    backtrack(i + 1, comb);\n                    comb.pop();\n                }\n            }\n            backtrack(1, []);\n            return res;\n        }"
+    },
+    {
+        "question_id": "78",
+        "title_slug": "subsets",
+        "content": "Given an integer array nums of unique elements, return all possible subsets (the power set).",
+        "typed_code": "function subsets(nums) {\n            let res = [];\n            function backtrack(start, subset) {\n                res.push([...subset]);\n                for (let i = start; i < nums.length; i++) {\n                    subset.push(nums[i]);\n                    backtrack(i + 1, subset);\n                    subset.pop();\n                }\n            }\n            backtrack(0, []);\n            return res;\n        }"
+    },
+    {
+        "question_id": "79",
+        "title_slug": "word-search",
+        "content": "Given an m x n grid of characters board and a string word, return true if word exists in the grid.",
+        "typed_code": "function exist(board, word) {\n            const directions = [[0, 1], [1, 0], [0, -1], [-1, 0]];\n            const m = board.length, n = board[0].length;\n\n            function dfs(r, c, i) {\n                if (i === word.length) return true;\n                if (r < 0 || c < 0 || r >= m || c >= n || board[r][c] !== word[i]) return false;\n\n                const temp = board[r][c];\n                board[r][c] = '#';  // Mark as visited\n                for (const [dr, dc] of directions) {\n                    if (dfs(r + dr, c + dc, i + 1)) return true;\n                }\n                board[r][c] = temp;  // Restore the cell\n                return false;\n            }\n\n            for (let r = 0; r < m; r++) {\n                for (let c = 0; c < n; c++) {\n                    if (dfs(r, c, 0)) return true;\n                }\n            }\n            return false;\n        }"
+    },
+    {
+        "question_id": "80",
+        "title_slug": "remove-duplicates-from-sorted-array-ii",
+        "content": "Given an integer array nums sorted in non-decreasing order, remove some duplicates in-place such that each unique element appears at most twice.",
+        "typed_code": "function removeDuplicates(nums) {\n            let i = 0;\n            for (let n of nums) {\n                if (i < 2 || n > nums[i - 2]) {\n                    nums[i] = n;\n                    i++;\n                }\n            }\n            return i;\n        }"
+    }
+]

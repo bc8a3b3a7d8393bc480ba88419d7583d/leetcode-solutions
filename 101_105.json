@@ -1,0 +1,32 @@
+[
+    {
+        "question_id": "101",
+        "title_slug": "symmetric-tree",
+        "content": "Given the <code>root</code> of a binary tree, <em>check whether it is a mirror of itself</em> (i.e., symmetric around its center).\n\n&nbsp;\n<strong class=\"example\">Example 1:</strong>\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/symtree1.jpg\" style=\"width: 354px; height: 291px;\" />\n<pre>\n<strong>Input:</strong> root = [1,2,2,3,4,4,3]\n<strong>Output:</strong> true\n</pre>\n\n<strong class=\"example\">Example 2:</strong>\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/symtree2.jpg\" style=\"width: 308px; height: 258px;\" />\n<pre>\n<strong>Input:</strong> root = [1,2,2,null,3,null,3]\n<strong>Output:</strong> false\n</pre>\n\n&nbsp;\n<strong>Constraints:</strong>\n\n<ul>\n\t<li>The number of nodes in the tree is in the range <code>[1, 1000]</code>.</li>\n\t<li><code>-100 &lt;= Node.val &lt;= 100</code></li>\n</ul>\n\n&nbsp;\n<strong>Follow up:</strong> Could you solve it both recursively and iteratively?",
+        "typed_code": "// JS solution for: <p>Given the <code>root</code>..."
+    },
+    {
+        "question_id": "102",
+        "title_slug": "binary-tree-level-order-traversal",
+        "content": "Given the <code>root</code> of a binary tree, return <em>the level order traversal of its nodes&#39; values</em>. (i.e., from left to right, level by level).\n\n&nbsp;\n<strong class=\"example\">Example 1:</strong>\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/tree1.jpg\" style=\"width: 277px; height: 302px;\" />\n<pre>\n<strong>Input:</strong> root = [3,9,20,null,null,15,7]\n<strong>Output:</strong> [[3],[9,20],[15,7]]\n</pre>\n\n<strong class=\"example\">Example 2:</strong>\n\n<pre>\n<strong>Input:</strong> root = [1]\n<strong>Output:</strong> [[1]]\n</pre>\n\n<strong class=\"example\">Example 3:</strong>\n\n<pre>\n<strong>Input:</strong> root = []\n<strong>Output:</strong> []\n</pre>\n\n&nbsp;\n<strong>Constraints:</strong>\n\n<ul>\n\t<li>The number of nodes in the tree is in the range <code>[0, 2000]</code>.</li>\n\t<li><code>-1000 &lt;= Node.val &lt;= 1000</code></li>\n</ul>\n",
+        "typed_code": "// JS solution for: <p>Given the <code>root</code>..."
+    },
+    {
+        "question_id": "103",
+        "title_slug": "binary-tree-zigzag-level-order-traversal",
+        "content": "Given the <code>root</code> of a binary tree, return <em>the zigzag level order traversal of its nodes&#39; values</em>. (i.e., from left to right, then right to left for the next level and alternate between).\n\n&nbsp;\n<strong class=\"example\">Example 1:</strong>\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/tree1.jpg\" style=\"width: 277px; height: 302px;\" />\n<pre>\n<strong>Input:</strong> root = [3,9,20,null,null,15,7]\n<strong>Output:</strong> [[3],[20,9],[15,7]]\n</pre>\n\n<strong class=\"example\">Example 2:</strong>\n\n<pre>\n<strong>Input:</strong> root = [1]\n<strong>Output:</strong> [[1]]\n</pre>\n\n<strong class=\"example\">Example 3:</strong>\n\n<pre>\n<strong>Input:</strong> root = []\n<strong>Output:</strong> []\n</pre>\n\n&nbsp;\n<strong>Constraints:</strong>\n\n<ul>\n\t<li>The number of nodes in the tree is in the range <code>[0, 2000]</code>.</li>\n\t<li><code>-100 &lt;= Node.val &lt;= 100</code></li>\n</ul>\n",
+        "typed_code": "// JS solution for: <p>Given the <code>root</code>..."
+    },
+    {
+        "question_id": "104",
+        "title_slug": "maximum-depth-of-binary-tree",
+        "content": "Given the <code>root</code> of a binary tree, return <em>its maximum depth</em>.\n\nA binary tree&#39;s <strong>maximum depth</strong>&nbsp;is the number of nodes along the longest path from the root node down to the farthest leaf node.\n\n&nbsp;\n<strong class=\"example\">Example 1:</strong>\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/11/26/tmp-tree.jpg\" style=\"width: 400px; height: 277px;\" />\n<pre>\n<strong>Input:</strong> root = [3,9,20,null,null,15,7]\n<strong>Output:</strong> 3\n</pre>\n\n<strong class=\"example\">Example 2:</strong>\n\n<pre>\n<strong>Input:</strong> root = [1,null,2]\n<strong>Output:</strong> 2\n</pre>\n\n&nbsp;\n<strong>Constraints:</strong>\n\n<ul>\n\t<li>The number of nodes in the tree is in the range <code>[0, 10<sup>4</sup>]</code>.</li>\n\t<li><code>-100 &lt;= Node.val &lt;= 100</code></li>\n</ul>\n",
+        "typed_code": "// JS solution for: <p>Given the <code>root</code>..."
+    },
+    {
+        "question_id": "105",
+        "title_slug": "construct-binary-tree-from-preorder-and-inorder-traversal",
+        "content": "Given two integer arrays <code>preorder</code> and <code>inorder</code> where <code>preorder</code> is the preorder traversal of a binary tree and <code>inorder</code> is the inorder traversal of the same tree, construct and return <em>the binary tree</em>.\n\n&nbsp;\n<strong class=\"example\">Example 1:</strong>\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/tree.jpg\" style=\"width: 277px; height: 302px;\" />\n<pre>\n<strong>Input:</strong> preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]\n<strong>Output:</strong> [3,9,20,null,null,15,7]\n</pre>\n\n<strong class=\"example\">Example 2:</strong>\n\n<pre>\n<strong>Input:</strong> preorder = [-1], inorder = [-1]\n<strong>Output:</strong> [-1]\n</pre>\n\n&nbsp;\n<strong>Constraints:</strong>\n\n<ul>\n\t<li><code>1 &lt;= preorder.length &lt;= 3000</code></li>\n\t<li><code>inorder.length == preorder.length</code></li>\n\t<li><code>-3000 &lt;= preorder[i], inorder[i] &lt;= 3000</code></li>\n\t<li><code>preorder</code> and <code>inorder</code> consist of <strong>unique</strong> values.</li>\n\t<li>Each value of <code>inorder</code> also appears in <code>preorder</code>.</li>\n\t<li><code>preorder</code> is <strong>guaranteed</strong> to be the preorder traversal of the tree.</li>\n\t<li><code>inorder</code> is <strong>guaranteed</strong> to be the inorder traversal of the tree.</li>\n</ul>\n",
+        "typed_code": "// JS solution for: <p>Given two integer arrays <c..."
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "question_id": "106",
+        "title_slug": "construct-binary-tree-from-inorder-and-postorder-traversal",
+        "content": "Given two integer arrays inorder and postorder where inorder is the inorder traversal of a binary tree and postorder is the postorder traversal of the same tree, construct and return the binary tree.",
+        "typed_code": "function buildTree(inorder, postorder) {\n    if (!inorder.length || !postorder.length) return null;\n    const root = new TreeNode(postorder.pop());\n    const idx = inorder.indexOf(root.val);\n    root.right = buildTree(inorder.slice(idx + 1), postorder);\n    root.left = buildTree(inorder.slice(0, idx), postorder);\n    return root;\n}"
+    },
+    {
+        "question_id": "107",
+        "title_slug": "binary-tree-level-order-traversal-ii",
+        "content": "Given the root of a binary tree, return the bottom-up level order traversal of its nodes' values. (i.e., from left to right, level by level from leaf to root).",
+        "typed_code": "function levelOrderBottom(root) {\n    if (!root) return [];\n    const result = [], queue = [root];\n    while (queue.length) {\n        const level = [];\n        let size = queue.length;\n        while (size--) {\n            const node = queue.shift();\n            level.push(node.val);\n            if (node.left) queue.push(node.left);\n            if (node.right) queue.push(node.right);\n        }\n        result.unshift(level);\n    }\n    return result;\n}"
+    },
+    {
+        "question_id": "108",
+        "title_slug": "convert-sorted-array-to-binary-search-tree",
+        "content": "Given an integer array nums where the elements are sorted in ascending order, convert it to a height-balanced binary search tree.",
+        "typed_code": "function sortedArrayToBST(nums) {\n    if (!nums.length) return null;\n    const mid = Math.floor(nums.length / 2);\n    const root = new TreeNode(nums[mid]);\n    root.left = sortedArrayToBST(nums.slice(0, mid));\n    root.right = sortedArrayToBST(nums.slice(mid + 1));\n    return root;\n}"
+    },
+    {
+        "question_id": "109",
+        "title_slug": "convert-sorted-list-to-binary-search-tree",
+        "content": "Given the head of a singly linked list where elements are sorted in ascending order, convert it to a height-balanced binary search tree.",
+        "typed_code": "function sortedListToBST(head) {\n    const listToArray = (head) => {\n        const arr = [];\n        while (head) {\n            arr.push(head.val);\n            head = head.next;\n        }\n        return arr;\n    }\n    return sortedArrayToBST(listToArray(head));\n}"
+    },
+    {
+        "question_id": "110",
+        "title_slug": "balanced-binary-tree",
+        "content": "Given a binary tree, determine if it is height-balanced.",
+        "typed_code": "function isBalanced(root) {\n    function height(node) {\n        if (!node) return 0;\n        const leftHeight = height(node.left);\n        const rightHeight = height(node.right);\n        if (leftHeight === -1 || rightHeight === -1 || Math.abs(leftHeight - rightHeight) > 1) return -1;\n        return Math.max(leftHeight, rightHeight) + 1;\n    }\n    return height(root) !== -1;\n}"
+    }
+]

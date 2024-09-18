@@ -1,0 +1,32 @@
+[
+    {
+        "question_id": "81",
+        "title_slug": "search-in-rotated-sorted-array-ii",
+        "content": "There is an integer array nums sorted in non-decreasing order (not necessarily with distinct values). Before being passed to your function, nums is rotated at an unknown pivot index k (0 <= k < nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed). For example, [0,1,2,4,4,4,5,6,6,7] might be rotated at pivot index 5 and become [4,5,6,6,7,0,1,2,4,4]. Given the array nums after the rotation and an integer target, return true if target is in nums, or false if it is not in nums. You must decrease the overall operation steps as much as possible.",
+        "typed_code": "\n        var search = function(nums, target) {\n            let left = 0, right = nums.length - 1;\n            while (left <= right) {\n                const mid = Math.floor((left + right) / 2);\n                if (nums[mid] === target) return true;\n                if (nums[left] === nums[mid] && nums[mid] === nums[right]) {\n                    left++;\n                    right--;\n                } else if (nums[left] <= nums[mid]) {\n                    if (nums[left] <= target && target < nums[mid]) right = mid - 1;\n                    else left = mid + 1;\n                } else {\n                    if (nums[mid] < target && target <= nums[right]) left = mid + 1;\n                    else right = mid - 1;\n                }\n            }\n            return false;\n        };\n        "
+    },
+    {
+        "question_id": "82",
+        "title_slug": "remove-duplicates-from-sorted-list-ii",
+        "content": "Given the head of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well.",
+        "typed_code": "\n        var deleteDuplicates = function(head) {\n            if (!head || !head.next) return head;\n            const dummy = new ListNode(0);\n            dummy.next = head;\n            let prev = dummy;\n            while (head) {\n                if (head.next && head.val === head.next.val) {\n                    while (head.next && head.val === head.next.val) head = head.next;\n                    prev.next = head.next;\n                } else {\n                    prev = prev.next;\n                }\n                head = head.next;\n            }\n            return dummy.next;\n        };\n        "
+    },
+    {
+        "question_id": "83",
+        "title_slug": "remove-duplicates-from-sorted-list",
+        "content": "Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.",
+        "typed_code": "\n        var deleteDuplicates = function(head) {\n            let current = head;\n            while (current && current.next) {\n                if (current.val === current.next.val) {\n                    current.next = current.next.next;\n                } else {\n                    current = current.next;\n                }\n            }\n            return head;\n        };\n        "
+    },
+    {
+        "question_id": "84",
+        "title_slug": "largest-rectangle-in-histogram",
+        "content": "Given an array of integers heights representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.",
+        "typed_code": "\n        var largestRectangleArea = function(heights) {\n            let maxArea = 0;\n            const stack = [];\n            for (let i = 0; i <= heights.length; i++) {\n                const h = i === heights.length ? 0 : heights[i];\n                while (stack.length && h < heights[stack[stack.length - 1]]) {\n                    const height = heights[stack.pop()];\n                    const width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;\n                    maxArea = Math.max(maxArea, height * width);\n                }\n                stack.push(i);\n            }\n            return maxArea;\n        };\n        "
+    },
+    {
+        "question_id": "85",
+        "title_slug": "maximal-rectangle",
+        "content": "Given a rows x cols binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.",
+        "typed_code": "\n        var maximalRectangle = function(matrix) {\n            if (matrix.length === 0) return 0;\n            const heights = Array(matrix[0].length).fill(0);\n            let maxArea = 0;\n            for (let row of matrix) {\n                for (let i = 0; i < row.length; i++) {\n                    heights[i] = row[i] === '1' ? heights[i] + 1 : 0;\n                }\n                maxArea = Math.max(maxArea, largestRectangleArea(heights));\n            }\n            return maxArea;\n        };\n        function largestRectangleArea(heights) {\n            let maxArea = 0;\n            const stack = [];\n            for (let i = 0; i <= heights.length; i++) {\n                const h = i === heights.length ? 0 : heights[i];\n                while (stack.length && h < heights[stack[stack.length - 1]]) {\n                    const height = heights[stack.pop()];\n                    const width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;\n                    maxArea = Math.max(maxArea, height * width);\n                }\n                stack.push(i);\n            }\n            return maxArea;\n        }\n        "
+    }
+]

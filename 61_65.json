@@ -1,0 +1,32 @@
+[
+    {
+        "questionId": "61",
+        "titleSlug": "rotate-list",
+        "content": "Given the head of a linked list, rotate the list to the right by k places.",
+        "typed_code": "\n        function rotateRight(head, k) {\n            if (!head || k === 0) return head;\n            \n            let oldTail = head;\n            let length = 1;\n            \n            // Get the length of the list and find the last node\n            while (oldTail.next) {\n                oldTail = oldTail.next;\n                length++;\n            }\n            \n            // Make it a circular list\n            oldTail.next = head;\n            \n            // Find the new tail and new head\n            let newTail = head;\n            for (let i = 0; i < length - (k % length) - 1; i++) {\n                newTail = newTail.next;\n            }\n            \n            let newHead = newTail.next;\n            newTail.next = null;\n            \n            return newHead;\n        }\n        "
+    },
+    {
+        "questionId": "62",
+        "titleSlug": "unique-paths",
+        "content": "There is a robot on an m x n grid. The robot is initially located at the top-left corner (grid[0][0]). The robot tries to move to the bottom-right corner (grid[m - 1][n - 1]). The robot can only move either down or right at any point in time.",
+        "typed_code": "\n        function uniquePaths(m, n) {\n            const dp = Array(m).fill(0).map(() => Array(n).fill(0));\n            \n            for (let i = 0; i < m; i++) dp[i][0] = 1;\n            for (let j = 0; j < n; j++) dp[0][j] = 1;\n            \n            for (let i = 1; i < m; i++) {\n                for (let j = 1; j < n; j++) {\n                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1];\n                }\n            }\n            \n            return dp[m - 1][n - 1];\n        }\n        "
+    },
+    {
+        "questionId": "63",
+        "titleSlug": "unique-paths-ii",
+        "content": "You are given an m x n integer array grid. There is a robot initially located at the top-left corner (grid[0][0]). The robot tries to move to the bottom-right corner (grid[m - 1][n - 1]). The robot can only move either down or right at any point in time. An obstacle and space are marked as 1 or 0 respectively in grid.",
+        "typed_code": "\n        function uniquePathsWithObstacles(obstacleGrid) {\n            const m = obstacleGrid.length;\n            const n = obstacleGrid[0].length;\n            \n            const dp = Array(m).fill(0).map(() => Array(n).fill(0));\n            dp[0][0] = obstacleGrid[0][0] === 0 ? 1 : 0;\n            \n            for (let i = 1; i < m; i++) {\n                dp[i][0] = obstacleGrid[i][0] === 0 && dp[i - 1][0] === 1 ? 1 : 0;\n            }\n            \n            for (let j = 1; j < n; j++) {\n                dp[0][j] = obstacleGrid[0][j] === 0 && dp[0][j - 1] === 1 ? 1 : 0;\n            }\n            \n            for (let i = 1; i < m; i++) {\n                for (let j = 1; j < n; j++) {\n                    if (obstacleGrid[i][j] === 0) {\n                        dp[i][j] = dp[i - 1][j] + dp[i][j - 1];\n                    }\n                }\n            }\n            \n            return dp[m - 1][n - 1];\n        }\n        "
+    },
+    {
+        "questionId": "64",
+        "titleSlug": "minimum-path-sum",
+        "content": "Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right, which minimizes the sum of all numbers along its path.",
+        "typed_code": "\n        function minPathSum(grid) {\n            const m = grid.length;\n            const n = grid[0].length;\n            \n            const dp = Array(m).fill(0).map(() => Array(n).fill(0));\n            dp[0][0] = grid[0][0];\n            \n            for (let i = 1; i < m; i++) {\n                dp[i][0] = dp[i - 1][0] + grid[i][0];\n            }\n            \n            for (let j = 1; j < n; j++) {\n                dp[0][j] = dp[0][j - 1] + grid[0][j];\n            }\n            \n            for (let i = 1; i < m; i++) {\n                for (let j = 1; j < n; j++) {\n                    dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];\n                }\n            }\n            \n            return dp[m - 1][n - 1];\n        }\n        "
+    },
+    {
+        "questionId": "65",
+        "titleSlug": "valid-number",
+        "content": "Given a string s, return whether s is a valid number.",
+        "typed_code": "\n        function isNumber(s) {\n            return /^[+-]?((\\d+\\.\\d*)|(\\d*\\.\\d+)|(\\d+))(e[+-]?\\d+)?$/i.test(s.trim());\n        }\n        "
+    }
+]

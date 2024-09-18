@@ -1,0 +1,32 @@
+[
+    {
+        "question_id": "46",
+        "title_slug": "permutations",
+        "content": "Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.\n\nExample 1:\nInput: nums = [1,2,3]\nOutput: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]\n\nExample 2:\nInput: nums = [0,1]\nOutput: [[0,1],[1,0]]\n\nExample 3:\nInput: nums = [1]\nOutput: [[1]]\n\nConstraints:\n1 <= nums.length <= 6\n-10 <= nums[i] <= 10\nAll the integers of nums are unique.",
+        "typed_code": "\n    function permute(nums) {\n        const result = [];\n        function backtrack(temp = [], used = Array(nums.length).fill(false)) {\n            if (temp.length === nums.length) {\n                result.push([...temp]);\n                return;\n            }\n            for (let i = 0; i < nums.length; i++) {\n                if (used[i]) continue;\n                used[i] = true;\n                temp.push(nums[i]);\n                backtrack(temp, used);\n                temp.pop();\n                used[i] = false;\n            }\n        }\n        backtrack();\n        return result;\n    }\n    "
+    },
+    {
+        "question_id": "47",
+        "title_slug": "permutations-ii",
+        "content": "Given a collection of numbers, nums, that might contain duplicates, return all possible unique permutations in any order.\n\nExample 1:\nInput: nums = [1,1,2]\nOutput:\n[[1,1,2],\n [1,2,1],\n [2,1,1]]\n\nExample 2:\nInput: nums = [1,2,3]\nOutput: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]\n\nConstraints:\n1 <= nums.length <= 8\n-10 <= nums[i] <= 10",
+        "typed_code": "\n    function permuteUnique(nums) {\n        nums.sort((a, b) => a - b);\n        const result = [];\n        function backtrack(temp = [], used = Array(nums.length).fill(false)) {\n            if (temp.length === nums.length) {\n                result.push([...temp]);\n                return;\n            }\n            for (let i = 0; i < nums.length; i++) {\n                if (used[i] || (i > 0 && nums[i] === nums[i - 1] && !used[i - 1])) continue;\n                used[i] = true;\n                temp.push(nums[i]);\n                backtrack(temp, used);\n                temp.pop();\n                used[i] = false;\n            }\n        }\n        backtrack();\n        return result;\n    }\n    "
+    },
+    {
+        "question_id": "48",
+        "title_slug": "rotate-image",
+        "content": "You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise). You have to rotate the image in-place, which means you have to modify the input 2D matrix directly. DO NOT allocate another 2D matrix and do the rotation.\n\nExample 1:\nInput: matrix = [[1,2,3],[4,5,6],[7,8,9]]\nOutput: [[7,4,1],[8,5,2],[9,6,3]]\n\nExample 2:\nInput: matrix = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]\nOutput: [[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]\n\nConstraints:\nn == matrix.length == matrix[i].length\n1 <= n <= 20\n-1000 <= matrix[i][j] <= 1000",
+        "typed_code": "\n    function rotate(matrix) {\n        const n = matrix.length;\n        for (let i = 0; i < n; i++) {\n            for (let j = i; j < n; j++) {\n                [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]];\n            }\n        }\n        for (let i = 0; i < n; i++) {\n            matrix[i].reverse();\n        }\n    }\n    "
+    },
+    {
+        "question_id": "49",
+        "title_slug": "group-anagrams",
+        "content": "Given an array of strings strs, group the anagrams together. You can return the answer in any order.\n\nExample 1:\nInput: strs = [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]\nOutput: [[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]\n\nExample 2:\nInput: strs = [\"\"]\nOutput: [[\"\"]]\n\nExample 3:\nInput: strs = [\"a\"]\nOutput: [[\"a\"]]\n\nConstraints:\n1 <= strs.length <= 10^4\n0 <= strs[i].length <= 100\nstrs[i] consists of lowercase English letters.",
+        "typed_code": "\n    function groupAnagrams(strs) {\n        const map = new Map();\n        for (let str of strs) {\n            const key = [...str].sort().join('');\n            if (!map.has(key)) map.set(key, []);\n            map.get(key).push(str);\n        }\n        return [...map.values()];\n    }\n    "
+    },
+    {
+        "question_id": "50",
+        "title_slug": "powx-n",
+        "content": "Implement pow(x, n), which calculates x raised to the power n (i.e., x^n).\n\nExample 1:\nInput: x = 2.00000, n = 10\nOutput: 1024.00000\n\nExample 2:\nInput: x = 2.10000, n = 3\nOutput: 9.26100\n\nExample 3:\nInput: x = 2.00000, n = -2\nOutput: 0.25000\n\nExplanation: 2^-2 = 1/2^2 = 1/4 = 0.25\n\nConstraints:\n-100.0 < x < 100.0\n-2^31 <= n <= 2^31 - 1\nn is an integer.\nEither x is not zero or n > 0.\n-10^4 <= x^n <= 10^4",
+        "typed_code": "\n    function myPow(x, n) {\n        if (n === 0) return 1;\n        if (n < 0) {\n            x = 1 / x;\n            n = -n;\n        }\n        return (n % 2 === 0) ? myPow(x * x, n / 2) : x * myPow(x * x, Math.floor(n / 2));\n    }\n    "
+    }
+]

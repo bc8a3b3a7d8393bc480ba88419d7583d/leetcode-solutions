@@ -1,0 +1,32 @@
+[
+    {
+        "question_id": "36",
+        "title_slug": "valid-sudoku",
+        "content": "Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules: Each row must contain the digits 1-9 without repetition. Each column must contain the digits 1-9 without repetition. Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition. Note: A Sudoku board (partially filled) could be valid but is not necessarily solvable. Only the filled cells need to be validated according to the mentioned rules.",
+        "typed_code": "function isValidSudoku(board) {\n        const rows = new Array(9).fill(0).map(() => new Set());\n        const cols = new Array(9).fill(0).map(() => new Set());\n        const boxes = new Array(9).fill(0).map(() => new Set());\n        \n        for (let r = 0; r < 9; r++) {\n            for (let c = 0; c < 9; c++) {\n                const value = board[r][c];\n                if (value === '.') continue;\n                \n                const boxIndex = Math.floor(r / 3) * 3 + Math.floor(c / 3);\n                \n                if (rows[r].has(value) || cols[c].has(value) || boxes[boxIndex].has(value)) {\n                    return false;\n                }\n                \n                rows[r].add(value);\n                cols[c].add(value);\n                boxes[boxIndex].add(value);\n            }\n        }\n        return true;\n    }"
+    },
+    {
+        "question_id": "37",
+        "title_slug": "sudoku-solver",
+        "content": "Write a program to solve a Sudoku puzzle by filling the empty cells. A sudoku solution must satisfy all of the following rules: Each of the digits 1-9 must occur exactly once in each row. Each of the digits 1-9 must occur exactly once in each column. Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid. The '.' character indicates empty cells.",
+        "typed_code": "function solveSudoku(board) {\n        function isValid(board, row, col, num) {\n            for (let i = 0; i < 9; i++) {\n                if (board[row][i] === num || board[i][col] === num || board[Math.floor(row / 3) * 3 + Math.floor(i / 3)][Math.floor(col / 3) * 3 + i % 3] === num) {\n                    return false;\n                }\n            }\n            return true;\n        }\n\n        function solve(board) {\n            for (let row = 0; row < 9; row++) {\n                for (let col = 0; col < 9; col++) {\n                    if (board[row][col] === '.') {\n                        for (let num = '1'; num <= '9'; num++) {\n                            if (isValid(board, row, col, num)) {\n                                board[row][col] = num;\n                                if (solve(board)) {\n                                    return true;\n                                }\n                                board[row][col] = '.';\n                            }\n                        }\n                        return false;\n                    }\n                }\n            }\n            return true;\n        }\n\n        solve(board);\n    }"
+    },
+    {
+        "question_id": "38",
+        "title_slug": "count-and-say",
+        "content": "The count-and-say sequence is a sequence of digit strings defined by the recursive formula: countAndSay(1) = '1'. countAndSay(n) is the run-length encoding of countAndSay(n - 1). Run-length encoding (RLE) is a string compression method that works by replacing consecutive identical characters with the concatenation of the character and the count. For example, '3322251' is compressed to '23321511'. Given n, return the nth element of the count-and-say sequence.",
+        "typed_code": "function countAndSay(n) {\n        if (n === 1) return \"1\";\n        let prev = countAndSay(n - 1);\n        let count = 1;\n        let result = \"\";\n        for (let i = 0; i < prev.length; i++) {\n            if (prev[i] === prev[i + 1]) {\n                count++;\n            } else {\n                result += count + prev[i];\n                count = 1;\n            }\n        }\n        return result;\n    }"
+    },
+    {
+        "question_id": "39",
+        "title_slug": "combination-sum",
+        "content": "Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order. The same number may be chosen from candidates an unlimited number of times.",
+        "typed_code": "function combinationSum(candidates, target) {\n        const result = [];\n        function backtrack(start, target, combination) {\n            if (target === 0) {\n                result.push([...combination]);\n                return;\n            }\n            if (target < 0) return;\n\n            for (let i = start; i < candidates.length; i++) {\n                combination.push(candidates[i]);\n                backtrack(i, target - candidates[i], combination);\n                combination.pop();\n            }\n        }\n        backtrack(0, target, []);\n        return result;\n    }"
+    },
+    {
+        "question_id": "40",
+        "title_slug": "combination-sum-ii",
+        "content": "Given a collection of candidate numbers candidates and a target number target, find all unique combinations in candidates where the candidate numbers sum to target. Each number in candidates may only be used once in the combination. The solution set must not contain duplicate combinations.",
+        "typed_code": "function combinationSum2(candidates, target) {\n        candidates.sort((a, b) => a - b);\n        const result = [];\n        function backtrack(start, target, combination) {\n            if (target === 0) {\n                result.push([...combination]);\n                return;\n            }\n            if (target < 0) return;\n\n            for (let i = start; i < candidates.length; i++) {\n                if (i > start && candidates[i] === candidates[i - 1]) continue;\n                combination.push(candidates[i]);\n                backtrack(i + 1, target - candidates[i], combination);\n                combination.pop();\n            }\n        }\n        backtrack(0, target, []);\n        return result;\n    }"
+    }
+]

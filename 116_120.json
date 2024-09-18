@@ -1,0 +1,32 @@
+[
+    {
+      "question_id": "116",
+      "title_slug": "populating-next-right-pointers-in-each-node",
+      "content": "You are given a perfect binary tree where all leaves are on the same level, and every parent has two children. Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL. Initially, all next pointers are set to NULL.",
+      "typed_code": "function connect(root) { if (!root) return root; let leftmost = root; while (leftmost.left) { let head = leftmost; while (head) { head.left.next = head.right; if (head.next) { head.right.next = head.next.left; } head = head.next; } leftmost = leftmost.left; } return root; }"
+    },
+    {
+      "question_id": "117",
+      "title_slug": "populating-next-right-pointers-in-each-node-ii",
+      "content": "Given a binary tree, populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL. Initially, all next pointers are set to NULL.",
+      "typed_code": "function connect(root) { let head = root; let nextHead = null, prev = null; while (head) { while (head) { if (head.left) { if (prev) prev.next = head.left; prev = head.left; if (!nextHead) nextHead = head.left; } if (head.right) { if (prev) prev.next = head.right; prev = head.right; if (!nextHead) nextHead = head.right; } head = head.next; } head = nextHead; nextHead = null; prev = null; } return root; }"
+    },
+    {
+      "question_id": "118",
+      "title_slug": "pascals-triangle",
+      "content": "Given an integer numRows, return the first numRows of Pascal's triangle. In Pascal's triangle, each number is the sum of the two numbers directly above it.",
+      "typed_code": "function generate(numRows) { let triangle = []; for (let i = 0; i < numRows; i++) { triangle[i] = Array(i + 1).fill(1); for (let j = 1; j < i; j++) { triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j]; } } return triangle; }"
+    },
+    {
+      "question_id": "119",
+      "title_slug": "pascals-triangle-ii",
+      "content": "Given an integer rowIndex, return the rowIndex-th (0-indexed) row of the Pascal's triangle. Each number is the sum of the two numbers directly above it.",
+      "typed_code": "function getRow(rowIndex) { let row = [1]; for (let i = 1; i <= rowIndex; i++) { for (let j = i - 1; j > 0; j--) { row[j] = row[j] + row[j - 1]; } row.push(1); } return row; }"
+    },
+    {
+      "question_id": "120",
+      "title_slug": "triangle",
+      "content": "Given a triangle array, return the minimum path sum from top to bottom. For each step, you may move to an adjacent number of the row below.",
+      "typed_code": "function minimumTotal(triangle) { for (let i = triangle.length - 2; i >= 0; i--) { for (let j = 0; j < triangle[i].length; j++) { triangle[i][j] += Math.min(triangle[i + 1][j], triangle[i + 1][j + 1]); } } return triangle[0][0]; }"
+    }
+  ]
